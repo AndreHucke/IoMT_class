@@ -254,6 +254,10 @@ void loop() {
   Signal = 0;
   for (int i = 0; i < SAMPLE_SIZE; i++) {
     Signal += readings[i];
+    // Send Signal to ThingsBoard
+    tb.sendTelemetryData("signal", readings[i]);
+    Serial.print("Published Signal: ");
+    Serial.println(Raw data);
   }
   Signal /= SAMPLE_SIZE;
   readIndex = (readIndex + 1) % SAMPLE_SIZE;
@@ -304,4 +308,3 @@ void loop() {
     valleyValue = 1023;
   }
 }
-
