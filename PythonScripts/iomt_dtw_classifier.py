@@ -1,8 +1,14 @@
 import numpy as np
 from dtw import dtw
 import json
+from pathlib import Path
 
-with open('Example_python/iomt_data_1.json', 'r') as file:
+# Best thing out-of-the-box for time series data classification
+
+data_path = Path('Example_python/iomt_data_1.json').resolve()
+data_path_2 = Path('Example_python/iomt_data_2.json').resolve()
+
+with open(data_path, 'r') as file:
     data = json.load(file)
 
 key_list = list(data.keys())
@@ -20,11 +26,11 @@ from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=3)
 classes = np.concatenate((np.zeros(100), np.ones(100)))
-knn.fit(dtw_out, classes) 
+knn.fit(dtw_out, classes)
 
 # Predict class of new data
 # Load iomt_data_2.json
-with open('Example_python/iomt_data_2.json', 'r') as file:
+with open(data_path_2, 'r') as file:
     data_2 = json.load(file)
 
 key_list_2 = list(data_2.keys())
